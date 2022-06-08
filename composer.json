@@ -1,0 +1,23 @@
+{
+    "name": "sadist/nfp",
+    "scripts": {
+      "serve": "php -S 127.0.0.1:8848 -t public",
+      "stop": "killall -9 php"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Framework\\": "framework/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Sick Sadist",
+            "email": "prunepal333@gmail.com"
+        }
+    ],
+    "require": {},
+    "config": {
+      "process-timeout": 0
+    }
+}
