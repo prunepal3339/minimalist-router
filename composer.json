@@ -1,5 +1,5 @@
 {
-    "name": "sadist/nfp",
+    "name": "sadist/mrouter",
     "scripts": {
       "serve": "php -S 127.0.0.1:8848 -t public",
       "stop": "killall -9 php"
