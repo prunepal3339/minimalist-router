@@ -2,7 +2,7 @@
 
 How to use this library?
 METHOD 1:
-1. Clone this repository : `git clone https://github.com/prunepal333/minimalist-router.git`Cancel changes
+1. Clone this repository : `git clone https://github.com/prunepal333/minimalist-router.git`
 2. Start working on top of this architecture.
 
 METHOD 2:
