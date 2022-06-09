@@ -1,1 +1,12 @@
-## A simple router in core PHP with support for dynamic paramter routing and named routing.
+## A simple router in core PHP with support for dynamic parameter routing and named routing.
+
+How to use this library?
+METHOD 1:
+1. Clone this repository : `git clone https://github.com/prunepal333/minimalist-router.git`
+2. Start working on top of this architecture.
+
+METHOD 2:
+1. Initialize the project: `composer init`
+2. Run the following command from the project's directory:
+  `composer require 'sadist/mrouter'`
+3. Run `composer install`
