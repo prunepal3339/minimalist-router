@@ -1,5 +1,6 @@
 <?php
 namespace Framework\Routing;
+
 use Framework\Exception\RouteException\ParameterMismatchException;
 class Route
 {
@@ -7,11 +8,8 @@ class Route
   protected string $method;
   protected string $path;
   protected array $parameters;
-  /**
-  *@var callable
-  */
   protected $handler;
-  public function __construct(string $method, string $path, callable $handler)
+  public function __construct(string $method, string $path, callable | array | string $handler)
   {
     $this->method = $method;
     $this->handler = $handler;
@@ -21,6 +19,7 @@ class Route
     preg_match_all('#\{([^/]*)\}#', $path, $matches);
     if (isset($matches[1]) && !empty($matches[1]))
     {
+      // var_dump($matches[1]);
       $this->parameters = $matches[1];
     }
   }
@@ -59,9 +58,17 @@ class Route
   }
   public function path(){return $this->path;}
   public function method(){return $this->method;}
-  public function dispatch()
+  public function dispatch(Router& $router)
   {
-    return ($this->handler)();
+    if (is_array($this->handler))
+    {
+      [$class, $method] = $this->handler;
+      return (new $class($router))->{$method}();
+    }else if (is_string($this->handler)){
+      $class = $this->handler;
+      return new (new $class($router))();
+    }
+    return ($this->handler)($router);
     //➔ Multiple ways of calling a callable $fn($args), call_user_func($fn, $args), eval ( I have no idea about this)
   }
   public function routeParams(): array

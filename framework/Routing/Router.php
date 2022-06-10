@@ -8,14 +8,23 @@ class Router
   protected array $routes = [];
   protected array $errorHandlers = array();
   protected ?Route $currentRoute = null;
+  /**
+   * Adds the route endpoint to the router
+   * 
+   * @param string $method HTTP Method (eg; get, put, post, delete)
+   * @param string $path URL Path 
+   * @param callable|array|string $handler callable request handler function or a invokable class or method
+   * 
+   * @return Route
+   */
   public function add(
       string $method,
       string $path,
-      callable $handler
+      callable|array|string $handler
     ): Route
     {
-      $this->currentRoute = $this->routes[] = new Route($method, $path, $handler);
-      return $this->currentRoute;
+      $route = $this->routes[] = new Route($method, $path, $handler);
+      return $route;
     }
     public function route(string $routeName, ?array $params = null)
     {
@@ -51,11 +60,7 @@ class Router
       $requestPath = $_SERVER['REQUEST_URI'] ?? '/';
       if (($matching = $this->match($requestMethod, $requestPath)))
       {
-        try {
-          return $matching->dispatch();
-        }catch(\Throwable $e) {
-          return $this->dispatchError();
-        }
+          return $matching->dispatch($this);
       }
       if (in_array($requestPath, $this->paths()))
       {
@@ -77,6 +82,7 @@ class Router
       {
         if ($route->match($method, $path))
         {
+          $this->currentRoute = $route;
           return $route;
         }
       }
