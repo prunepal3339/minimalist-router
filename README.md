@@ -9,22 +9,28 @@
 
 //templates/user.php
 user.php
-
+```
 <?php foreach($users as $user): ?>
-    <?php if>
-<?php foreach; ?> // PHP in HTML
+    echo $user->name;
+<?php endforeach; ?> // PHP in HTML
+```
 
-
-==> output HTML
-
+```
 return this->render('home/index.html.twig', [
     'users' => [
-        ['id' => 1, 'name' => 'Nischa'],
+        ['id' => 1, 'name' => 'Nisha'],
     ]
  ]);
+```
 
-
+```
+Advanced Templating Engine
  {% for user in users %}
  <p>{{user.name}}</p>
- {% endfor %} -- Advanced Templating Engine
+ {% endfor %}
+```
 
+
+```
+Ability to write custom HTML tags in PHP --> HTMLInPHP i.e. PHX engine
+```
